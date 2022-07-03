@@ -17,3 +17,10 @@ class LoginPageLocators():
     REG_BUTTON = (By.XPATH, '//*[@id="register_form"]/button')
     REG_ALLERT = (By.CSS_SELECTOR, '.alert-danger')
     REG_ALLERT_SUCCESS = (By.CSS_SELECTOR, '.alert-success')
+
+class ProductPageLocators():
+    ADD_PRODUCT_BUTTON = (By.CSS_SELECTOR, '#add_to_basket_form>button[type^="submit"]')
+    PRODUCT_NAME_TEXT = (By.CSS_SELECTOR, '.product_main>h1')
+    SUCCESS_MSG_ADD_PRODUCT_TO_BASKET_TEXT = (By.CSS_SELECTOR, '.alertinner>strong:nth-child(1)')
+    PRODUCT_PRICE_TEXT = (By.CSS_SELECTOR, '.product_main>.price_color')
+    BASKET_PRICE_TEXT = (By.CSS_SELECTOR, '.alertinner>p>strong')
