@@ -1,5 +1,10 @@
 from selenium.webdriver.common.by import By
 
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    ADD_TO_BASKET = (By.XPATH, "//*[@class='btn-group']")
+
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
 
@@ -24,3 +29,6 @@ class ProductPageLocators():
     SUCCESS_MSG_ADD_PRODUCT_TO_BASKET_TEXT = (By.CSS_SELECTOR, '.alertinner>strong:nth-child(1)')
     PRODUCT_PRICE_TEXT = (By.CSS_SELECTOR, '.product_main>.price_color')
     BASKET_PRICE_TEXT = (By.CSS_SELECTOR, '.alertinner>p>strong')
+    PRODUCT_HAS_BEEN_ADDED_TEXT = (By.CSS_SELECTOR, '#messages .alert:nth-child(1)')
+    EMPTY_BASKET_MESSAGE = (By.CSS_SELECTOR, '#content_inner>p')
+    ITEM_BASKET_MESSAGE = (By.CSS_SELECTOR, '#basket_formset')

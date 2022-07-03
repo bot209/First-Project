@@ -1,14 +1,23 @@
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait as WD
 from selenium.webdriver.support import expected_conditions as EC
+from .locators import BasePageLocators
 import math
-import time
 
 class BasePage():
+    def go_to_login_page(self):
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
+    
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login link is not presented'
+
+    def guest_click_button_see_basket(self):
+        link = self.browser.find_element(*BasePageLocators.ADD_TO_BASKET).click()
+
     def __init__(self, browser, url: str, timeout: int = 10):
-            self.browser = browser
-            self.url = url
-            self.browser.implicitly_wait(timeout)
+        self.browser = browser
+        self.url = url
+        # self.browser.implicitly_wait(timeout)
 
     def open(self):
         self.browser.get(self.url)
@@ -26,7 +35,7 @@ class BasePage():
         answer = str(math.log(abs((12 * math.sin(float(x))))))
         alert.send_keys(answer)
         alert.accept()
-        # try:                                                          # Отключаем метод проверочный метод
+        # try:                                                                                           # Отключаем проверочный метод
         #     alert = self.browser.switch_to.alert
         #     alert_text = alert.text
         #     print(f"Your code: {alert_text}")
@@ -34,15 +43,15 @@ class BasePage():
         # except NoAlertPresentException:
         #     print("No second alert presented")
 
-    def is_not_element_present(self, how, what, timeout=5):         # Элемент не появляется на странице в течении заданного времени
-        try:
+    def is_not_element_present(self, how, what, timeout=4):                                              # Абстрактный метод, который проверяет, что элемент не появляется на странице в течении заданного времени
+        try:                                                                                             # Упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый. 
             WD(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return True
         return False
 
-    def is_disappeared(self, how, what, timeout=5):                 # Проверка если какой-то элемент исчезает (Будет ждать до тех пор, пока элемент не исчезнет)
-        try:
+    def is_disappeared(self, how, what, timeout=4):                                                     # Проверяет если какой-то элемент исчезает (Будет ждать до тех пор, пока элемент не исчезнет)
+        try:                                                                                            # Будет ждать до тех пор, пока элемент не исчезнет.
             WD(self.browser, timeout, 1, TimeoutException).until_not(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False

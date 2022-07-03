@@ -44,3 +44,10 @@ class ProductPage(BasePage):
         product_price = self.get_product_price()
         basket_price = self.get_basket_price_from_msg()
         assert product_price == basket_price, 'Product prices are not equal'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_HAS_BEEN_ADDED_TEXT)
+
+    def should_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.PRODUCT_HAS_BEEN_ADDED_TEXT)
+    

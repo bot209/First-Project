@@ -1,6 +1,7 @@
-import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import pytest
+import time
 
 # # Парсим язык сайта
 # def pytest_addoption(parser):
@@ -27,6 +28,7 @@ from selenium.webdriver.chrome.options import Options
 #     yield browser
 #     print(f"\nQuit chrome browser for '{lang}' language..")
 #     browser.quit()
+
 @pytest.fixture(scope='function')
 def browser():
     print('\n Запускаю браузер...')
