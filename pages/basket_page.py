@@ -1,12 +1,19 @@
-from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait as WD
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
 class BasketPage(BasePage):
-    def in_basket_are_no_item(self):
-        assert self.is_not_element_present(*ProductPageLocators.ITEM_BASKET_MESSAGE)
+    def open_basket(self):
+        try:
+            self.browser.find_element(*ProductPageLocators.BASKET_BUTTON)
+        except NoSuchElementException:
+            return False
+        return True
 
-    def expect_text_that_the_basket_is_empty(self):
-        assert self.is_element_present(*ProductPageLocators.EMPTY_BASKET_MESSAGE)
+    def is_basket_empty(self):
+        try:
+            self.browser.find_element(*ProductPageLocators.EMPTY_BASKET_MESSAGE)
+            result = True
+        except NoSuchElementException:
+            result = False
+        assert result is True, 'Basket is not empty'
