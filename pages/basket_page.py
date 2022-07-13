@@ -6,7 +6,7 @@ from .locators import ProductPageLocators
 
 class BasketPage(BasePage):
     def in_basket_are_no_item(self):
-        assert self.is_not_element_present(*ProductPageLocators.ITEM_BASKET_MESSAGE)               # Ожидаем, что в корзине нет товаров
+        assert self.is_not_element_present(*ProductPageLocators.ITEM_BASKET_MESSAGE)
 
-    def expect_text_that_the_basket_is_empty(self):                                                # Ожидаем, что есть текст о том что корзина пуста
+    def expect_text_that_the_basket_is_empty(self):
         assert self.is_element_present(*ProductPageLocators.EMPTY_BASKET_MESSAGE)

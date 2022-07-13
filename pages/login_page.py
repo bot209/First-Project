@@ -1,27 +1,24 @@
-from .main_page import MainPage
 from .base_page import BasePage
-from .locators import LoginPageLocators, MainPageLocators
+from .locators import LoginPageLocators
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
-        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), 'Login link is not presented'
+        self.should_be_login_url()
+        self.should_be_login_form()
+        self.should_be_register_form()
 
     def should_be_login_url(self):                      # реализовать проверку на корректный url адрес
-        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), 'Login link is not presented'
+        assert self.url == 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
 
     def should_be_login_form(self):                     # реализовать проверку, что есть форма логина
-        link = self.browser.find_element(*LoginPageLocators.LOGIN_LINK).click()
-        self.browser.find_element(*LoginPageLocators.LOGIN_EMAIL).send_keys('loloalo@bk.ru')
-        self.browser.find_element(*LoginPageLocators.LOGIN_PASSWORD).send_keys('QaWsEd12345')
-        self.browser.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
-        Failed = self.browser.find_element(*LoginPageLocators.LOGIN_ALLERT_FAILED).text
-        assert Failed == "Опаньки! Мы нашли какие-то ошибки", 'Проверьте введеные данные в поле для авторизации'
+        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM)
     
-    def should_be_register_form(self):                   # реализовать проверку, что есть форма регистрации на странице
-        link = self.browser.find_element(*LoginPageLocators.LOGIN_LINK).click()
-        self.browser.find_element(*LoginPageLocators.REG_EMAIL).send_keys('lfaaaololo@bk.ru')
-        self.browser.find_element(*LoginPageLocators.REG_PASS).send_keys('123456')
-        self.browser.find_element(*LoginPageLocators.REG_PASS_2).send_keys('123456')
+    def should_be_register_form(self):                  # реализовать проверку, что есть форма логина
+        assert self.is_element_present(*LoginPageLocators.REG_FORM)
+
+    def register_new_user(self, email,password):
+        self.browser.get('http://selenium1py.pythonanywhere.com/ru/accounts/login/')
+        self.browser.find_element(*LoginPageLocators.REG_EMAIL).send_keys(email)
+        self.browser.find_element(*LoginPageLocators.REG_PASS).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REG_PASS_2).send_keys(password)
         self.browser.find_element(*LoginPageLocators.REG_BUTTON).click()
-        Failed = self.browser.find_element(*LoginPageLocators.REG_ALLERT).text
-        assert Failed == 'Опаньки! Мы нашли какие-то ошибки', 'Проверьте введеные данные в поле для регистрации'
