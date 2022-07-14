@@ -8,7 +8,7 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):                      # реализовать проверку на корректный url адрес
-        assert self.url == 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
+        assert self.url == 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
 
     def should_be_login_form(self):                     # реализовать проверку, что есть форма логина
         assert self.is_element_present(*LoginPageLocators.LOGIN_FORM)
