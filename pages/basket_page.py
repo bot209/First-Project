@@ -5,7 +5,7 @@ from .locators import ProductPageLocators
 class BasketPage(BasePage):
     def open_basket(self):
         try:
-            self.browser.find_element(*ProductPageLocators.BASKET_BUTTON)
+            self.browser.find_element(*ProductPageLocators.BASKET_BUTTON).click()
         except NoSuchElementException:
             return False
         return True
